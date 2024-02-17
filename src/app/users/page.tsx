@@ -1,7 +1,6 @@
 // Static Site Generation of Mock API
 // NextJS prefetches content in production, and can optionally revalidate if data changes
 
-import { Suspense } from 'react';
 import User from '../_components/User';
 import { Fragment } from 'react';
 import type { UserInfo } from '../_components/User';
@@ -30,9 +29,7 @@ export default async function Users() {
   return (
     <>
       <h1>User Data</h1>
-      <Suspense fallback='Loading...'>
-        <div className='grid grid-cols-1 gap-10 md:grid-cols-2'>{userData}</div>
-      </Suspense>
+      <div className='grid grid-cols-1 gap-10 md:grid-cols-2'>{userData}</div>
     </>
   );
 }
