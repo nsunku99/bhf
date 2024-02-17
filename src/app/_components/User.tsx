@@ -36,8 +36,18 @@ export default function User({
         <h1 className='my-5 text-2xl font-semibold'>Meet {firstName}!</h1>
         <p>{`${firstName} ${lastName}`} </p>
         <p>{`${age} years old`} </p>
-        <a href={`mailto:${email}`}>{`${email}`} </a>
-        <p>{` ${company.title} at ${company.name}`} </p>
+        <a className='hover:opacity-50' href={`mailto:${email}`}>
+          {`${email}`}{' '}
+        </a>
+        <p>
+          <span className='font-semibold'>{company.title}</span> at{' '}
+          <a
+            className='hover:opacity-75'
+            href={`https://www.google.com/search?q=${company.name}`}
+          >
+            {company.name}
+          </a>
+        </p>
       </div>
     </div>
   );
