@@ -5,7 +5,6 @@ import { Suspense } from 'react';
 import User from '../_components/User';
 import { Fragment } from 'react';
 import type { UserInfo } from '../_components/User';
-import { resolve } from 'path';
 
 export default async function Users() {
   const response = await fetch('https://dummyjson.com/users?limit=20');
