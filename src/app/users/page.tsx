@@ -10,10 +10,19 @@ export default async function Users() {
   const data = await response.json();
 
   const userData = data.users.map(
-    ({ image, firstName, lastName, age, email, company }: UserInfo) => {
+    ({
+      id,
+      image,
+      firstName,
+      lastName,
+      age,
+      email,
+      company,
+    }: UserInfo & { id: number }) => {
       return (
-        <Fragment key={`${firstName} ${lastName}`}>
+        <Fragment key={id}>
           <User
+            id={id}
             image={image}
             firstName={firstName}
             lastName={lastName}
