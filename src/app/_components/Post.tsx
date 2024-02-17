@@ -6,7 +6,7 @@ export type PostInfo = {
 
 export default function Post({ title, body, tags }: PostInfo) {
   return (
-    <div className='p-3 my-5 text-lg border rounded-lg border-slate-800'>
+    <div className='p-3 my-5 text-lg rounded-lg shadow-md bg-slate-100'>
       <p className='m-2 font-semibold'>{title}</p>
       <p className='m-2 text-sm'>{body}</p>
       <div className='m-2'>
