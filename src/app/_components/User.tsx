@@ -1,7 +1,9 @@
 import type { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export type UserInfo = {
+  id: number;
   image: StaticImport;
   firstName: string;
   lastName: string;
@@ -14,6 +16,7 @@ export type UserInfo = {
 };
 
 export default function User({
+  id,
   image,
   firstName,
   lastName,
@@ -32,10 +35,15 @@ export default function User({
           width={150}
         />
       </div>
-      <div>
-        <h1 className='my-5 text-2xl font-semibold'>Meet {firstName}!</h1>
-        <p>{`${firstName} ${lastName}`} </p>
-        <p>{`${age} years old`} </p>
+      <div className='flex flex-col items-start justify-around gap-5'>
+        <p className='text-3xl font-bold '>{`${firstName} ${lastName}`} </p>
+        <Link
+          href={`/users/${id}`}
+          className='p-3 text-xl font-semibold bg-purple-400 border-2 border-purple-600 rounded-xl hover:opacity-75'
+        >
+          Meet {firstName}!
+        </Link>
+        {/* <p>{`${age} years old`} </p>
         <a className='hover:opacity-50' href={`mailto:${email}`}>
           {`${email}`}{' '}
         </a>
@@ -47,7 +55,7 @@ export default function User({
           >
             {company.name}
           </a>
-        </p>
+        </p> */}
       </div>
     </div>
   );
