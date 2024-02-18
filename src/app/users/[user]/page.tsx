@@ -1,11 +1,12 @@
 import Image from 'next/image';
 import type { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import Post, { type PostInfo } from '@/app/components/Post';
-import { Fragment } from 'react';
+import { Fragment, Suspense } from 'react';
 
 export type UserQuickInfo = {
   firstName: string;
   lastName: string;
+  jobTitle: string;
   image: StaticImport;
 };
 
@@ -27,17 +28,23 @@ export default async function UserPage({
 
   // fetch user display information
   const userRes = await fetch(`${process.env.USERS_URI}/${id}`);
-  const { firstName, lastName, image }: UserQuickInfo = await userRes.json();
+  const { firstName, lastName, jobTitle, image }: UserQuickInfo =
+    await userRes.json();
 
   // fetch user's posts
-  const postsRes = await fetch(`${process.env.USERS_URI}/${id}/posts`);
+  const postsRes = await fetch(`${process.env.USERS_URI}/${id}/posts`, {
+    cache: 'no-cache',
+    next: {
+      tags: ['post'],
+    },
+  });
   const postData = await postsRes.json();
 
   // generate post fragments
   const posts = Array.isArray(postData) ? (
     postData.map(({ id, title, body, tags, reactions }: PostInfo) => {
       return (
-        <Fragment key={title}>
+        <Suspense key={title} fallback='Loading...'>
           <Post
             id={id}
             title={title}
@@ -45,7 +52,7 @@ export default async function UserPage({
             tags={tags}
             reactions={reactions}
           />
-        </Fragment>
+        </Suspense>
       );
     })
   ) : (
