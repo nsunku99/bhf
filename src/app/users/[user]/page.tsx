@@ -1,11 +1,17 @@
 import Image from 'next/image';
-import Post from '@/app/_components/Post';
-import type { PostInfo } from '@/app/_components/Post';
+import type { StaticImport } from 'next/dist/shared/lib/get-img-props';
+import Post, { type PostInfo } from '@/app/components/Post';
 import { Fragment } from 'react';
 
+export type UserQuickInfo = {
+  firstName: string;
+  lastName: string;
+  image: StaticImport;
+};
+
 export async function generateStaticParams() {
-  const res = await fetch('https://dummyjson.com/users?limit=20');
-  const { users } = await res.json();
+  const res = await fetch(`${process.env.USERS_URI}`);
+  const users = await res.json();
 
   return users.map(({ id }: { id: number }) => ({
     slug: id,
@@ -17,44 +23,50 @@ export default async function UserPage({
 }: {
   params: { user: string };
 }) {
-  const { user } = params;
+  const { user: id } = params;
 
-  const res = await fetch(`https://dummyjson.com/users/${user}`);
-  const data = await res.json();
-  // console.log(data);
+  // fetch user display information
+  const userRes = await fetch(`${process.env.USERS_URI}/${id}`);
+  const { firstName, lastName, image }: UserQuickInfo = await userRes.json();
 
-  const postsRes = await fetch(`https://dummyjson.com/users/${user}/posts`);
-  const { posts: postData } = await postsRes.json();
-  console.log(postData);
+  // fetch user's posts
+  const postsRes = await fetch(`${process.env.USERS_URI}/${id}/posts`);
+  const postData = await postsRes.json();
 
-  const posts =
-    postData && postData.length ? (
-      postData.map(({ title, body, tags }: PostInfo) => {
-        return (
-          <Fragment key={title}>
-            <Post title={title} body={body} tags={tags} />
-          </Fragment>
-        );
-      })
-    ) : (
-      <p className='p-32 text-center text-slate-600'>
-        {data.firstName} has not made any posts yet
-      </p>
-    );
+  // generate post fragments
+  const posts = Array.isArray(postData) ? (
+    postData.map(({ id, title, body, tags, reactions }: PostInfo) => {
+      return (
+        <Fragment key={title}>
+          <Post
+            id={id}
+            title={title}
+            body={body}
+            tags={tags}
+            reactions={reactions}
+          />
+        </Fragment>
+      );
+    })
+  ) : (
+    <p className='p-32 text-center text-slate-600'>
+      {firstName} has not made any posts yet
+    </p>
+  );
 
   return (
     <div>
       <div className='flex'>
         <Image
           className='m-5'
-          src={data.image}
-          alt={`Image of ${data.firstName}`}
+          src={image}
+          alt={`Image of ${firstName}`}
           height={150}
           width={150}
         />
         <div className='m-5'>
           <p className='text-3xl'>
-            {data.firstName} {data.lastName}
+            {firstName} {lastName}
           </p>
         </div>
       </div>
