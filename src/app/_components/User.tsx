@@ -25,21 +25,22 @@ export default function User({
   company,
 }: UserInfo) {
   return (
-    <div className='flex flex-col items-center justify-center gap-5 px-5 py-10 bg-purple-100 shadow-xl rounded-xl md:flex-row md:flex-wrap'>
-      <div>
+    <div className='relative z-0 flex flex-col items-center justify-center gap-5 p-5 py-10 shadow-xl rounded-xl md:flex-row md:flex-wrap'>
+      <div className='absolute top-0 w-full bg-purple-500 md:hidden rounded-t-xl -z-10 h-2/5'></div>
+      <div className='mt-16 bg-purple-200 rounded-full shadow-md md:mt-0'>
         <Image
-          className='m-3 min-w-[125px] h-full'
+          className='min-w-[125px] p-5 h-full'
           src={image}
           alt={`Picture of ${firstName}`}
           height={150}
           width={150}
         />
       </div>
-      <div className='flex flex-col items-center justify-around gap-5 md:items-start'>
+      <div className='flex flex-col items-center justify-around gap-5 mb-5 md:items-start'>
         <p className='text-3xl font-bold '>{`${firstName} ${lastName}`} </p>
         <Link
           href={`/users/${id}`}
-          className='p-3 bg-purple-400 border-2 rounded-xl hover:opacity-75'
+          className='px-5 py-3 bg-purple-500 border-2 rounded-full hover:opacity-75'
         >
           Meet {firstName}!
         </Link>
