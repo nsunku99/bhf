@@ -1,7 +1,7 @@
 'use client';
 
 import { PostInfo } from '@/types';
-import { likeButton, dislikeButton } from './actions';
+import { likeButton, dislikeButton } from '@/actions';
 import { useOptimistic } from 'react';
 
 export default function Post({ id, reactions, title, body, tags }: PostInfo) {
