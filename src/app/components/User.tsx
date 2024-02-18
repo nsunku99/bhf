@@ -8,10 +8,7 @@ export type UserInfo = {
   firstName: string;
   lastName: string;
   email: string;
-  company: {
-    name: string;
-    title: string;
-  };
+  company: string;
 };
 
 export default function User({
@@ -23,38 +20,30 @@ export default function User({
   company,
 }: UserInfo) {
   return (
-    <div className='relative z-0 flex flex-col items-center justify-center gap-5 p-5 py-10 shadow-xl rounded-xl md:flex-row md:flex-wrap'>
-      <div className='absolute top-0 w-full bg-purple-500 md:hidden rounded-t-xl -z-10 h-2/5'></div>
-      <div className='mt-16 bg-purple-200 rounded-full shadow-md md:mt-0'>
+    <div className='min-w-[325px] max-lg:max-w-[375px] relative z-0 flex flex-col items-center justify-center gap-5 p-5 py-10 shadow-xl rounded-xl lg:flex-row'>
+      <div className='absolute w-full bg-purple-600 max-lg:top-0 lg:w-1/4 lg:left-0 lg:h-full lg:rounded-l-xl max-lg:rounded-t-xl -z-10 h-2/5'></div>
+      <div className='max-[400px]:mt-8 mt-16 bg-purple-200 rounded-full shadow-md lg:mt-0'>
         <Image
-          className='min-w-[125px] p-5 h-full'
+          className='h-full p-5'
           src={image}
           alt={`Picture of ${firstName}`}
-          height={150}
-          width={150}
+          height={200}
+          width={200}
         />
       </div>
-      <div className='flex flex-col items-center justify-around gap-5 mb-5 md:items-start'>
-        <p className='text-3xl font-bold '>{`${firstName} ${lastName}`} </p>
+      <div className='flex flex-col items-center justify-around gap-5 my-5'>
+        <p className='text-3xl font-bold text-center'>
+          Hello! My Name Is{' '}
+          <span className='text-purple-600 underline decoration-black'>
+            &nbsp;{firstName}&nbsp;
+          </span>
+        </p>
         <Link
           href={`/users/${id}`}
-          className='px-5 py-3 bg-purple-500 border-2 rounded-full hover:opacity-75'
+          className='px-5 py-3 font-semibold text-white bg-purple-600 border-2 rounded-full hover:opacity-75'
         >
-          Meet {firstName}!
+          Meet Me!
         </Link>
-        {/* <p>{`${age} years old`} </p>
-        <a className='hover:opacity-50' href={`mailto:${email}`}>
-          {`${email}`}{' '}
-        </a>
-        <p>
-          <span className='font-semibold'>{company.title}</span> at{' '}
-          <a
-            className='hover:opacity-75'
-            href={`https://www.google.com/search?q=${company.name}`}
-          >
-            {company.name}
-          </a>
-        </p> */}
       </div>
     </div>
   );

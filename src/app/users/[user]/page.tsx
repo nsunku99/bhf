@@ -56,7 +56,7 @@ export default async function UserPage({
 
   return (
     <div>
-      <div className='flex'>
+      <div className='flex flex-col-reverse min-[550px]:flex-row'>
         <Image
           className='m-5'
           src={image}
@@ -65,7 +65,7 @@ export default async function UserPage({
           width={150}
         />
         <div className='m-5'>
-          <p className='text-3xl'>
+          <p className='text-3xl max-md:text-center'>
             {firstName} {lastName}
           </p>
         </div>
