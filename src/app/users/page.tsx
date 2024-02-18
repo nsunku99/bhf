@@ -28,9 +28,6 @@ export default async function Users() {
   );
 
   return (
-    <>
-      <h1>User Data</h1>
-      <div className='grid grid-cols-1 gap-10 md:grid-cols-2'>{userData}</div>
-    </>
+    <div className='grid grid-cols-1 gap-10 md:grid-cols-2'>{userData}</div>
   );
 }
