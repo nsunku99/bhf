@@ -7,7 +7,6 @@ export type UserInfo = {
   image: StaticImport;
   firstName: string;
   lastName: string;
-  age: number;
   email: string;
   company: {
     name: string;
@@ -20,7 +19,6 @@ export default function User({
   image,
   firstName,
   lastName,
-  age,
   email,
   company,
 }: UserInfo) {
