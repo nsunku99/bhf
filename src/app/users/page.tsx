@@ -1,24 +1,15 @@
 // Static Site Generation of Mock API
 // NextJS prefetches content in production, and can optionally revalidate if data changes
 
-import User from '../_components/User';
+import User, { type UserInfo } from '@/app/components/User';
 import { Fragment } from 'react';
-import type { UserInfo } from '../_components/User';
 
 export default async function Users() {
-  const response = await fetch('https://dummyjson.com/users?limit=20');
+  const response = await fetch('https://dummyjson.com/users');
   const data = await response.json();
 
   const userData = data.users.map(
-    ({
-      id,
-      image,
-      firstName,
-      lastName,
-      age,
-      email,
-      company,
-    }: UserInfo & { id: number }) => {
+    ({ id, image, firstName, lastName, email, company }: UserInfo) => {
       return (
         <Fragment key={id}>
           <User
@@ -26,7 +17,6 @@ export default async function Users() {
             image={image}
             firstName={firstName}
             lastName={lastName}
-            age={age}
             email={email}
             company={company}
           />
