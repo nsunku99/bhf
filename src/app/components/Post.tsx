@@ -15,7 +15,7 @@ export default function Post({ id, reactions, title, body, tags }: PostInfo) {
   // use optimistic to show an optimistic/predictive state to end user while api updates
   const [optLikes, changeOptLikes] = useOptimistic(
     reactions,
-    (state, amount) => state + Number(amount)
+    (state, amount: number) => state + amount
   );
 
   const optimisticAdd = async () => {
