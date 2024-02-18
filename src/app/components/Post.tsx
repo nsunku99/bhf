@@ -32,7 +32,7 @@ export default function Post({ id, reactions, title, body, tags }: PostInfo) {
     <div className='p-3 my-5 text-lg rounded-lg shadow-md bg-slate-100'>
       <p className='m-2 font-semibold'>{title}</p>
       <p className='m-2 text-sm'>{body}</p>
-      <div className='flex justify-between gap-2 m-2'>
+      <div className='flex justify-between m-2 gap-2'>
         <div className='flex'>
           <button onClick={() => optimisticAdd()}>
             <svg

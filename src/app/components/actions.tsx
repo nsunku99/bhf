@@ -1,5 +1,7 @@
 'use server';
 
+// server action functions
+
 import { revalidateTag } from 'next/cache';
 
 export async function likeButton(id: number, likes: number) {
