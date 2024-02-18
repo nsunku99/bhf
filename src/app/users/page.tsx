@@ -5,9 +5,11 @@ import User, { type UserInfo } from '@/app/components/User';
 import { Fragment } from 'react';
 
 export default async function Users() {
+  // fetch user data
   const response = await fetch('https://dummyjson.com/users');
   const data = await response.json();
 
+  // generate User Cards array
   const userData = data.users.map(
     ({ id, image, firstName, lastName, email, company }: UserInfo) => {
       return (
