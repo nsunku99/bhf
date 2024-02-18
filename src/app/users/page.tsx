@@ -1,8 +1,9 @@
 // Static Site Generation of Mock API
 // NextJS prefetches content in production, and can optionally revalidate if data changes
 
-import User, { type UserInfo } from '@/app/components/User';
+import User from '@/app/components/User';
 import { Fragment } from 'react';
+import { UserInfo } from '@/types';
 
 export default async function Users() {
   // fetch user data

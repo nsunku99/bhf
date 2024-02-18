@@ -1,14 +1,7 @@
 import Image from 'next/image';
-import type { StaticImport } from 'next/dist/shared/lib/get-img-props';
-import Post, { type PostInfo } from '@/app/components/Post';
+import Post from '@/app/components/Post';
+import type { PostInfo, UserQuickInfo } from '@/types';
 import { Fragment, Suspense } from 'react';
-
-export type UserQuickInfo = {
-  firstName: string;
-  lastName: string;
-  jobTitle: string;
-  image: StaticImport;
-};
 
 export async function generateStaticParams() {
   const res = await fetch(`${process.env.USERS_URI}`);
@@ -33,7 +26,7 @@ export default async function UserPage({
 
   // fetch user's posts
   const postsRes = await fetch(`${process.env.USERS_URI}/${id}/posts`, {
-    cache: 'no-cache',
+    // cache: 'no-cache', // uneed to
     next: {
       tags: ['post'],
     },

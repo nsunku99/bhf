@@ -1,15 +1,6 @@
-import type { StaticImport } from 'next/dist/shared/lib/get-img-props';
+import { UserInfo } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
-
-export type UserInfo = {
-  id: number;
-  image: StaticImport;
-  firstName: string;
-  lastName: string;
-  email: string;
-  company: string;
-};
 
 export default function User({
   id,
