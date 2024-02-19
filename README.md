@@ -51,4 +51,4 @@ Each of the posts have a like and dislike button, and both of these buttons trig
 - I used Tailwind to design the application with a mobile first approach, and then implemented responsive breakpoints for larger screen styles
 - TypeScript declarations were used throughout where possible, server actions are in actions.tsx, Components are in components folder
 - If you were wondering about the cat theme, because the dummy data profile pictures were all cats, I continued with that theme where applicable
-- The limits of the mockapi can sometimes slow the data population w/ respect to each user's posts, and if you spam the like / dislike buttons, they can
+- The limits of the mockapi can sometimes slow the data population w/ respect to each user's posts, and if you spam the like / dislike buttons, they can trigger an API rate limit
