@@ -30,8 +30,8 @@ export default function User({
           </span>
         </p>
         <Link
-          href={`/users/${id}`}
-          className='px-5 py-3 font-semibold text-white bg-purple-600 border-2 rounded-full hover:opacity-75'
+          href={`/${id}`}
+          className='px-5 py-3 font-semibold text-white bg-purple-600 rounded-full shadow-md hover:opacity-75 active:opacity-30'
         >
           Meet Me!
         </Link>
