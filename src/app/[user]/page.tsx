@@ -22,7 +22,6 @@ export default async function UserPage({
 
   // fetch user display information
   const userRes = await fetch(`${process.env.USERS_URI}/${id}`);
-  console.log(userRes.status, userRes.ok);
   if (!userRes.ok) notFound();
 
   const { firstName, lastName, jobTitle, image }: UserQuickInfo =
@@ -37,7 +36,6 @@ export default async function UserPage({
     },
   });
   const postData = await postsRes.json();
-  console.log(postData);
 
   // generate post fragments
   const posts = Array.isArray(postData) ? (
