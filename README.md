@@ -33,6 +33,7 @@ I utilized the `generateStaticParams()` function in the dynamic route handler, w
 To handle users/pages that don't exist, if the fetch response status is not good, the `notFound()` function from `next/navigation` is invoked and sends the user the 404 page.
 
 <h3>Server Action:</h3>
+
 Each of the posts have a like and dislike button, and both of these buttons trigger a server action. The actions behave fundamentally the same (aside from incrementing or decrementing the value):
 
 <br />
