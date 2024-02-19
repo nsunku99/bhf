@@ -1,15 +1,8 @@
 'use client';
 
-import { likeButton, dislikeButton } from './actions';
+import { PostInfo } from '@/types';
+import { likeButton, dislikeButton } from '@/actions';
 import { useOptimistic } from 'react';
-
-export type PostInfo = {
-  id: number;
-  title: string;
-  body: string;
-  tags: string[];
-  reactions: number;
-};
 
 export default function Post({ id, reactions, title, body, tags }: PostInfo) {
   // use optimistic to show an optimistic/predictive state to end user while api updates

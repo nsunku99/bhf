@@ -5,7 +5,7 @@
 import { revalidateTag } from 'next/cache';
 
 export async function likeButton(id: number, likes: number) {
-  const res = await fetch(`${process.env.POSTS_URI}/${id}`, {
+  await fetch(`${process.env.POSTS_URI}/${id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -13,14 +13,11 @@ export async function likeButton(id: number, likes: number) {
     body: JSON.stringify({ reactions: likes + 1 }),
   });
 
-  if (res.ok) {
-    console.log('New Like');
-    revalidateTag('post');
-  }
+  revalidateTag('post');
 }
 
 export async function dislikeButton(id: number, likes: number) {
-  const res = await fetch(`${process.env.POSTS_URI}/${id}`, {
+  await fetch(`${process.env.POSTS_URI}/${id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -28,8 +25,5 @@ export async function dislikeButton(id: number, likes: number) {
     body: JSON.stringify({ reactions: likes - 1 }),
   });
 
-  if (res.ok) {
-    console.log('Removed Like');
-    revalidateTag('post');
-  }
+  revalidateTag('post');
 }

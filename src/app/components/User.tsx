@@ -1,15 +1,6 @@
-import type { StaticImport } from 'next/dist/shared/lib/get-img-props';
+import { UserInfo } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
-
-export type UserInfo = {
-  id: number;
-  image: StaticImport;
-  firstName: string;
-  lastName: string;
-  email: string;
-  company: string;
-};
 
 export default function User({
   id,
@@ -39,8 +30,8 @@ export default function User({
           </span>
         </p>
         <Link
-          href={`/users/${id}`}
-          className='px-5 py-3 font-semibold text-white bg-purple-600 border-2 rounded-full hover:opacity-75'
+          href={`/${id}`}
+          className='px-5 py-3 font-semibold text-white bg-purple-600 rounded-full shadow-md hover:opacity-75 active:opacity-30'
         >
           Meet Me!
         </Link>
