@@ -10,7 +10,7 @@ export default function NotFound() {
       <Image className='w-auto h-1/3' src={cat404} alt='Not Found' />
       <p>Sorry, Page Does Not Exist</p>
       <Link className='p-3 m-3 text-white bg-purple-500 rounded-xl' href='/'>
-        Go Back to User List
+        Go Back Home
       </Link>
     </div>
   );
