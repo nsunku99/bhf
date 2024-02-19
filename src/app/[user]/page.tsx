@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import Post from '@/app/components/Post';
 import type { PostInfo, UserQuickInfo } from '@/types';
-import { Fragment, Suspense } from 'react';
+import { Fragment } from 'react';
+import { notFound } from 'next/navigation';
 
 export async function generateStaticParams() {
   const res = await fetch(`${process.env.USERS_URI}`);
@@ -21,23 +22,28 @@ export default async function UserPage({
 
   // fetch user display information
   const userRes = await fetch(`${process.env.USERS_URI}/${id}`);
+  console.log(userRes.status, userRes.ok);
+  if (!userRes.ok) notFound();
+
   const { firstName, lastName, jobTitle, image }: UserQuickInfo =
     await userRes.json();
 
   // fetch user's posts
+  // NOTE: necessary to turn off caching so posts aren't rerendered from memoized fetch data
   const postsRes = await fetch(`${process.env.USERS_URI}/${id}/posts`, {
-    // cache: 'no-cache', // uneed to
+    cache: 'no-store', // no-store === no-cache
     next: {
       tags: ['post'],
     },
   });
   const postData = await postsRes.json();
+  console.log(postData);
 
   // generate post fragments
   const posts = Array.isArray(postData) ? (
     postData.map(({ id, title, body, tags, reactions }: PostInfo) => {
       return (
-        <Suspense key={title} fallback='Loading...'>
+        <Fragment key={title}>
           <Post
             id={id}
             title={title}
@@ -45,7 +51,7 @@ export default async function UserPage({
             tags={tags}
             reactions={reactions}
           />
-        </Suspense>
+        </Fragment>
       );
     })
   ) : (
