@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Post from '@/app/components/Post';
+import Link from 'next/link';
 import type { PostInfo, UserQuickInfo } from '@/types';
 import { Fragment } from 'react';
 import { notFound } from 'next/navigation';
@@ -60,7 +61,13 @@ export default async function UserPage({
 
   return (
     <div>
-      <div className='flex flex-col-reverse min-[550px]:flex-row'>
+      <Link
+        className='px-5 py-3 mt-4 mb-32 font-semibold text-white bg-purple-600 rounded-full shadow-md hover:opacity-75 active:opacity-30'
+        href={'/'}
+      >
+        Go Back
+      </Link>
+      <div className='mt-14 flex flex-col-reverse items-center min-[550px]:flex-row'>
         <Image
           className='m-5'
           src={image}
@@ -68,10 +75,12 @@ export default async function UserPage({
           height={150}
           width={150}
         />
-        <div className='m-5'>
-          <p className='text-3xl max-md:text-center'>
+        <div className='w-full m-5 md:text-right max-md:text-center'>
+          <p className='text-3xl'>
             {firstName} {lastName}
           </p>
+          {/* <br /> */}
+          <p>{jobTitle}</p>
         </div>
       </div>
       {posts}
